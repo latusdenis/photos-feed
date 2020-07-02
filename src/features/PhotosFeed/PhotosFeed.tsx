@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  Text,
 } from "react-native";
 import { Image } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,8 @@ import { Routes } from "../../navigation/Routes";
 const PhotosFeed = () => {
   const dispatch = useDispatch();
   const photos = useSelector((state: PhotosState) => state.photos);
+
+  const { data, isLoading, error } = photos;
 
   useEffect(() => {
     dispatch(getPhotos(1));
@@ -30,14 +33,17 @@ const PhotosFeed = () => {
 
   return (
     <View>
+      {!!error && <Text>{error}</Text>}
+
       <FlatList
-        data={photos.data}
-        keyExtractor={(item) => item.id.toString()}
+        data={data}
+        keyExtractor={(photo) => photo.id.toString()}
         onEndReached={onLoadMore}
         onEndReachedThreshold={0.1}
         numColumns={2}
-        ListFooterComponent={() => <ActivityIndicator color="blue" />}
-        ListEmptyComponent={() => <ActivityIndicator color="blue" />}
+        ListEmptyComponent={() => (
+          <ActivityIndicator color="blue" animating={isLoading} />
+        )}
         renderItem={({ item: photo }) => {
           return (
             <TouchableOpacity

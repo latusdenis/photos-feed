@@ -1,8 +1,8 @@
-import { axios } from "./config";
+import { Api } from "./Api";
 import { PhotosData } from "../features/PhotosFeed/photosFeedSlice";
 
 export const PhotosApi = {
   getPhotos: (page: number, limit: number): Promise<PhotosData[]> => {
-    return axios.get(`/photos?_page=${page}&_limit=${limit}`);
+    return Api.get(`/photos?_page=${page}&_limit=${limit}`);
   },
 };

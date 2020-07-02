@@ -16,15 +16,15 @@ interface IPhotos {
   error: string | null;
 }
 
-export interface PhotosState {
-  photos: IPhotos;
-}
-
 const initialState: IPhotos = {
   isLoading: false,
   data: null,
   error: null,
 };
+
+export interface PhotosState {
+  photos: IPhotos;
+}
 
 export const photos = createSlice({
   name: "photos",
