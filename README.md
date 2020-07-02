@@ -1,4 +1,4 @@
-# React Native demo photos feed app.
+# Demo React Native photos app.
 
 Technologies used:
 1. React Native
